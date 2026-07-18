@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EmailEmil — Færdige svarudkast i din indbakke. I din egen tone.</title>
+<meta name="description" content="EmailEmil læser din indbakke og lægger færdige svarudkast klar som kladder i Gmail — skrevet i din egen tone. Bygget til danske håndværkere. 7 dages gratis prøve.">
+<link rel="icon" type="image/png" href="logo-mark.png">
+<meta property="og:title" content="EmailEmil — Færdige svarudkast i din indbakke">
+<meta property="og:description" content="EmailEmil lægger svarudkast klar som kladder i Gmail — i din egen tone. Bygget til danske håndværkere.">
+<meta property="og:image" content="logo.png">
+<style>
+  :root {
+    --blue: #1a73e8;
+    --blue-dark: #135cbc;
+    --blue-deep: #0e4a99;
+    --blue-tint: #e9f2fe;
+    --ink: #1c2b3a;
+    --paper: #ffffff;
+    --soft: #f4f8fe;
+    --muted: #5a6b7d;
+    --line: #dfe8f2;
+    --ok: #1d7a46;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+  }
+  h1, h2, h3, .logo, .btn {
+    font-family: "Arial Rounded MT Bold", "Avenir Next", "Trebuchet MS", sans-serif;
+  }
+  h1, h2, h3 { line-height: 1.15; letter-spacing: -.01em; }
+  a { color: var(--blue-dark); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,.95); backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.3rem; color: var(--blue); text-decoration: none; }
+  .logo svg { width: 40px; height: 40px; border-radius: 10px; }
+  .btn {
+    display: inline-block; background: var(--blue); color: #fff !important;
+    padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 700;
+    border: 0; cursor: pointer; font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(26,115,232,.3);
+  }
+  .btn:hover { background: var(--blue-dark); }
+  .btn.small { padding: 8px 18px; font-size: .95rem; }
+  .btn.ghost { background: #fff; color: var(--blue) !important; border: 2px solid var(--blue); box-shadow: none; }
+
+  .hero-bg { background: linear-gradient(180deg, var(--soft), #fff); }
+  .hero { padding: 72px 0 56px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  .hero h1 { font-size: 2.8rem; margin-bottom: 18px; color: var(--ink); }
+  .hero h1 em { font-style: normal; color: var(--blue); }
+  .hero p.lead { font-size: 1.2rem; color: var(--muted); margin-bottom: 26px; max-width: 44ch; }
+  .hero .sub { margin-top: 14px; font-size: .95rem; color: var(--muted); }
+  .hero .sub b { color: var(--ok); }
+
+  .draftcard {
+    background: #fff; border: 1px solid var(--line); border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(26,115,232,.14); padding: 18px 20px; font-size: .95rem;
+  }
+  .draftcard .bar { display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 12px; color: var(--muted); font-size: .85rem; }
+  .chip { background: var(--blue-tint); color: var(--blue-dark); border: 1px solid #bcd7f8; border-radius: 99px; padding: 2px 10px; font-size: .78rem; font-weight: 700; }
+  .draftcard p { margin-bottom: 10px; }
+  .draftcard .sig { color: var(--muted); }
+  .draftcard .hint { margin-top: 12px; font-size: .82rem; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 10px; }
+
+  section { padding: 64px 0; }
+  section.alt { background: var(--soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .kicker { text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+  h2 { font-size: 1.9rem; margin-bottom: 28px; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .step .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--blue); color: #fff; font-size: 1.3rem; font-weight: 700;
+    font-family: "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
+  }
+  .step h3 { margin: 12px 0 8px; font-size: 1.15rem; }
+  .step p { color: var(--muted); font-size: .97rem; }
+
+  .feats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .feat { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+  .feat h3 { font-size: 1.1rem; margin-bottom: 8px; }
+  .feat p { color: var(--muted); font-size: .97rem; }
+
+  .price-section { background: var(--blue); color: #f2f7ff; }
+  .price-section h2 { color: #fff; }
+  .price-section .kicker { color: #cfe2fb; }
+  .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: stretch; }
+  .pricecard { background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.28); border-radius: 18px; padding: 30px; }
+  .pricecard.featured { background: #fff; color: var(--ink); border: 0; position: relative; box-shadow: 0 16px 40px rgba(14,74,153,.35); }
+  .pricecard .tag { position: absolute; top: -14px; left: 24px; background: var(--blue-deep); color: #fff; font-size: .78rem; font-weight: 700; padding: 4px 14px; border-radius: 99px; }
+  .pricecard .amount { font-family: "Arial Rounded MT Bold", "Trebuchet MS", sans-serif; font-size: 2.5rem; font-weight: 700; }
+  .pricecard .amount small { font-size: 1rem; font-weight: 400; opacity: .75; }
+  .pricecard ul { list-style: none; margin: 18px 0 22px; }
+  .pricecard li { padding: 6px 0 6px 26px; position: relative; font-size: .95rem; }
+  .pricecard.featured li::before { content: "✓"; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+  .pricecard:not(.featured) li { color: #e3eefc; }
+  .pricecard:not(.featured) li::before { content: "✓"; position: absolute; left: 0; color: #fff; font-weight: 700; }
+  .pricecard:not(.featured) .btn { background: #fff; color: var(--blue) !important; box-shadow: none; }
+  .pricecard:not(.featured) .btn:hover { background: var(--blue-tint); }
+  .price-note { margin-top: 18px; color: #d7e6fb; font-size: .9rem; }
+
+  .faq details { border-bottom: 1px solid var(--line); padding: 14px 0; }
+  .faq summary { font-weight: 700; cursor: pointer; }
+  .faq summary::marker { color: var(--blue); }
+  .faq p { margin-top: 8px; color: var(--muted); }
+
+  .cta-final { text-align: center; }
+  .cta-final h2 { margin-bottom: 12px; }
+  .cta-final p { color: var(--muted); margin-bottom: 22px; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: .9rem; background: var(--soft); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+  @media (max-width: 820px) {
+    .hero { grid-template-columns: 1fr; padding: 44px 0 36px; }
+    .hero h1 { font-size: 2.1rem; }
+    .steps, .feats, .price-grid { grid-template-columns: 1fr; }
+    .btn.ghost { margin-left: 0 !important; margin-top: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#" aria-label="EmailEmil">
+      <img src="logo-mark.png" alt="" width="40" height="40" style="border-radius:10px; display:block;">
+      EmailEmil
+    </a>
+    <a class="btn small" href="#pris">Start gratis uge</a>
+  </div>
+</header>
+
+<main>
+  <div class="hero-bg">
+    <div class="wrap hero">
+      <div>
+        <h1>Ren indbakke. Færdige svar.<br><em>I din egen tone.</em></h1>
+        <p class="lead">EmailEmil læser dine mails og lægger færdige svarudkast klar som kladder i Gmail — skrevet som du selv ville have gjort. Du åbner, retter til, trykker send.</p>
+        <a class="btn" href="#pris">Start din gratis uge</a>
+        <a class="btn ghost" href="#hvordan" style="margin-left:10px">Se hvordan</a>
+        <p class="sub"><b>Sender aldrig noget selv.</b> Du har altid sidste ord. Ingen binding — opsig når som helst.</p>
+      </div>
+      <div class="draftcard" aria-label="Eksempel på et svarudkast">
+        <div class="bar"><span class="chip">Kladde klar</span> Re: Tilbud på opgang, Valby</div>
+        <p>Hej Michael.</p>
+        <p>Tak for din mail. Det lyder som en fin opgave. Jeg kan komme forbi og måle op onsdag eller torsdag eftermiddag — hvad passer bedst?</p>
+        <p>Prisen ligger typisk på [pris fra din prisliste], alt efter stand og antal m2.</p>
+        <p class="sig">Bh. Michael<br>Malerfirmaet Jensen &amp; Søn</p>
+        <div class="hint">Skrevet af EmailEmil ud fra dine tidligere mails og din prisliste — klar 3 minutter efter kundens mail landede.</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="hvordan" class="alt">
+    <div class="wrap">
+      <div class="kicker">Sådan virker det</div>
+      <h2>I gang på 5 minutter</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <h3>Forbind din Gmail</h3>
+          <p>Ét klik, log ind med Google. EmailEmil lærer din tone af de mails, du allerede har sendt — hilsner, vendinger, afslutning.</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h3>Upload din prisliste</h3>
+          <p>Læg dine priser og firmaoplysninger ind, så svarene rammer rigtigt — pris, adresse, hvordan I arbejder.</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h3>Åbn, ret, send</h3>
+          <p>Nye mails får automatisk et udkast lagt klar i tråden. Du læser det igennem, retter hvad du vil, og trykker send. Aldrig mere en tom skærm kl. 21.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="kicker">Bygget til byggebranchen</div>
+      <h2>Ikke endnu et amerikansk AI-værktøj</h2>
+      <div class="feats">
+        <div class="feat">
+          <h3>🇩🇰 Dansk — for alvor</h3>
+          <p>Skrevet til danske håndværkere og deres kunder. Ikke oversat engelsk. Gmail's egen AI kan slet ikke skrive dansk for dig — det kan Emil.</p>
+        </div>
+        <div class="feat">
+          <h3>✍️ Din tone, ikke robotsprog</h3>
+          <p>Emil lærer af dine egne sendte mails. Skriver du kort og kontant med et "Bh.", gør Emil det samme. Dine kunder kan ikke se forskel.</p>
+        </div>
+        <div class="feat">
+          <h3>📋 Kender dine priser</h3>
+          <p>Med din prisliste og firmafakta lagt ind svarer Emil rigtigt på pris- og praktikspørgsmål — og digter aldrig. Mangler en oplysning, står der et tydeligt felt, du selv udfylder.</p>
+        </div>
+        <div class="feat">
+          <h3>📚 Bliver bedre, jo mere du bruger den</h3>
+          <p>Hver gang du retter et udkast, lærer Emil af rettelsen. Efter et par uger rammer den tættere og tættere på, præcis som en ny kontorassistent, der lærer huset at kende.</p>
+        </div>
+        <div class="feat">
+          <h3>🗂️ Overblik uden oprydning</h3>
+          <p>Emil sorterer indbakken for dig: hvad kræver svar, hvad er vigtigt, hvad er reklame. Slå det til eller fra, som du vil.</p>
+        </div>
+        <div class="feat">
+          <h3>🔒 Du bestemmer — altid</h3>
+          <p>Emil sender aldrig en mail selv. Alt lander som kladder, du godkender. Dine mails er dine, og adgangen kan slås fra med ét klik.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pris" class="price-section">
+    <div class="wrap">
+      <div class="kicker">Pris</div>
+      <h2>Én pris. Ingen binding.</h2>
+      <div class="price-grid">
+        <div class="pricecard featured">
+          <div class="tag">Founding-tilbud — kun de første 20</div>
+          <div class="amount">399 kr<small> /md ekskl. moms — låst for altid</small></div>
+          <ul>
+            <li>Alt i EmailEmil, ubegrænsede kladder</li>
+            <li>Prisen stiger aldrig for dig</li>
+            <li>Direkte linje til stifteren</li>
+            <li>7 dages gratis prøve først</li>
+          </ul>
+          <a class="btn" href="mailto:oskar@bygai.dk?subject=EmailEmil%20%E2%80%94%20founding-plads&body=Hej%20Oskar.%20Jeg%20vil%20gerne%20have%20en%20founding-plads%20til%20EmailEmil.%20Mit%20firma%3A%20">Tag en founding-plads</a>
+        </div>
+        <div class="pricecard">
+          <div class="amount">499 kr<small> /md ekskl. moms</small></div>
+          <ul>
+            <li>Færdige svarudkast i din tone, direkte i Gmail</li>
+            <li>Prisliste &amp; firmaviden — svar der rammer rigtigt</li>
+            <li>Lærer af dine rettelser</li>
+            <li>Sortering og overblik (tilvalg)</li>
+            <li>Opsig når som helst</li>
+          </ul>
+          <a class="btn" href="mailto:oskar@bygai.dk?subject=EmailEmil%20%E2%80%94%20gratis%20uge&body=Hej%20Oskar.%20Jeg%20vil%20gerne%20pr%C3%B8ve%20EmailEmil%20gratis%20i%20en%20uge.%20Mit%20firma%3A%20">Start din gratis uge</a>
+        </div>
+      </div>
+      <p class="price-note">Regn selv efter: sparer Emil dig bare én time om måneden, er den betalt hjem. De fleste sparer timer — om ugen.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap faq">
+      <div class="kicker">Spørgsmål</div>
+      <h2>Det spørger alle om</h2>
+      <details>
+        <summary>Sender den mails uden at spørge mig?</summary>
+        <p>Nej. Aldrig. EmailEmil opretter kun kladder. Intet forlader din indbakke, før du selv har læst det og trykket send.</p>
+      </details>
+      <details>
+        <summary>Kan kunderne se, at det er skrevet af en maskine?</summary>
+        <p>Emil skriver ud fra dine egne tidligere mails — samme hilsen, samme længde, samme afslutning. Og fordi du altid retter til og godkender, er det i sidste ende dig, der har skrevet mailen.</p>
+      </details>
+      <details>
+        <summary>Hvad med mine data?</summary>
+        <p>Dine mails bruges kun til at lave dine udkast — aldrig til andet, og aldrig til at træne modeller for andre. Du kan trække adgangen tilbage med ét klik i din Google-konto, når som helst.</p>
+      </details>
+      <details>
+        <summary>Hvad hvis den skriver noget forkert?</summary>
+        <p>Emil digter aldrig priser eller aftaler. Ved oplysninger, den ikke kender, indsætter den et tydeligt felt, du selv udfylder. Og du læser altid udkastet, før det sendes.</p>
+      </details>
+      <details>
+        <summary>Bruger jeg Outlook?</summary>
+        <p>EmailEmil starter med Gmail. Outlook er på vej — skriv til os, så giver vi besked, når det er klar.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <div class="wrap">
+      <h2>Prøv en uge. Det koster ikke noget.</h2>
+      <p>Om 5 minutter ligger dit første udkast klar i din indbakke.</p>
+      <a class="btn" href="mailto:oskar@bygai.dk?subject=EmailEmil%20%E2%80%94%20gratis%20uge">Start din gratis uge</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© BygAI ApS — EmailEmil</div>
+    <div>oskar@bygai.dk · 61 71 92 81</div>
+  </div>
+</footer>
+
+</body>
+</html>
