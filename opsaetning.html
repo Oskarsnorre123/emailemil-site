@@ -7,33 +7,49 @@
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="logo-mark.png">
 <style>
-  :root { --blue:#1a73e8; --blue-dark:#135cbc; --ink:#1c2b3a; --muted:#5a6b7d; --line:#dfe8f2; --soft:#f4f8fe; --ok:#1d7a46; }
+  :root { --blue:#1a73e8; --blue-dark:#135cbc; --blue-tint:#e9f2fe; --ink:#1c2b3a; --muted:#5a6b7d; --line:#dfe8f2; --soft:#f4f8fe; --ok:#1d7a46; }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif; color:var(--ink); line-height:1.6; background:var(--soft); }
+  body { font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif; color:var(--ink); line-height:1.55; background:var(--soft); }
   h1,h2,.logo,.btn { font-family:"Arial Rounded MT Bold","Avenir Next","Trebuchet MS",sans-serif; }
-  .wrap { max-width:720px; margin:0 auto; padding:0 20px; }
+  .wrap { max-width:680px; margin:0 auto; padding:0 20px; }
   header { background:#fff; border-bottom:1px solid var(--line); }
   .nav { display:flex; align-items:center; gap:10px; padding-block:12px; }
   .logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.2rem; color:var(--blue); text-decoration:none; }
-  main { padding:36px 0 60px; }
-  .card { background:#fff; border:1px solid var(--line); border-radius:16px; padding:28px; margin-bottom:20px; }
-  h1 { font-size:1.7rem; margin-bottom:8px; }
-  .intro { color:var(--muted); margin-bottom:24px; }
-  h2 { font-size:1.05rem; margin:24px 0 4px; }
-  h2:first-of-type { margin-top:0; }
-  .hint { color:var(--muted); font-size:.88rem; margin-bottom:8px; }
-  label { display:block; font-weight:600; font-size:.95rem; margin:14px 0 4px; }
-  label .opt { font-weight:400; color:var(--muted); font-size:.85rem; }
-  input, textarea { width:100%; padding:11px 13px; border:1px solid var(--line); border-radius:10px; font:inherit; font-size:1rem; background:#fff; color:var(--ink); }
-  input:focus, textarea:focus { outline:2px solid var(--blue); outline-offset:-1px; border-color:var(--blue); }
-  textarea { min-height:90px; resize:vertical; }
+  main { padding:32px 0 60px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:16px; padding:26px; margin-bottom:16px; }
+  h1 { font-size:1.65rem; margin-bottom:6px; }
+  .intro { color:var(--muted); margin-bottom:4px; }
+  .stepnum { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; background:var(--blue); color:#fff; font-weight:700; font-size:.95rem; margin-right:10px; flex:none; }
+  h2 { font-size:1.15rem; display:flex; align-items:center; margin-bottom:4px; }
+  .hint { color:var(--muted); font-size:.9rem; margin:0 0 14px 38px; }
+  label.f { display:block; font-weight:600; font-size:.92rem; margin:12px 0 4px; }
+  label.f .opt { font-weight:400; color:var(--muted); font-size:.84rem; }
+  input[type=text], input[type=url], input[type=email], select, textarea { width:100%; padding:11px 13px; border:1px solid var(--line); border-radius:10px; font:inherit; font-size:1rem; background:#fff; color:var(--ink); }
+  input:focus, select:focus, textarea:focus { outline:2px solid var(--blue); outline-offset:-1px; }
+  textarea { min-height:84px; resize:vertical; }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:0 14px; }
+  @media (max-width:560px){ .row { grid-template-columns:1fr; } }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0 2px; }
+  .chip { border:1px solid var(--blue); color:var(--blue-dark); background:#fff; border-radius:99px; padding:6px 14px; font-size:.88rem; cursor:pointer; font-weight:600; }
+  .chip:hover { background:var(--blue-tint); }
+  .tones { display:grid; gap:10px; margin-top:8px; }
+  .tone { border:2px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer; display:block; }
+  .tone input { position:absolute; opacity:0; }
+  .tone.valgt { border-color:var(--blue); background:var(--blue-tint); }
+  .tone b { display:block; margin-bottom:4px; }
+  .tone .ex { color:var(--muted); font-size:.88rem; font-style:italic; }
+  .faq-item { border:1px solid var(--line); border-radius:10px; padding:10px 14px; margin-bottom:8px; background:#fff; }
+  .faq-item label.q { display:flex; gap:10px; align-items:center; font-weight:600; font-size:.93rem; cursor:pointer; }
+  .faq-item input[type=checkbox] { width:18px; height:18px; accent-color:var(--blue); flex:none; }
+  .faq-item .svar { display:none; margin-top:8px; }
+  .faq-item.aaben .svar { display:block; }
   .btn { display:inline-block; background:var(--blue); color:#fff; padding:13px 26px; border-radius:999px; border:0; font-weight:700; font-size:1rem; cursor:pointer; text-decoration:none; }
   .btn:hover { background:var(--blue-dark); }
   .btn.sec { background:#fff; color:var(--blue); border:2px solid var(--blue); }
-  .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
+  .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:20px; }
   #resultat { display:none; }
   #resultat.vis { display:block; }
-  #ud { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.85rem; min-height:260px; background:var(--soft); }
+  #ud { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.84rem; min-height:220px; background:var(--soft); }
   .ok { color:var(--ok); font-weight:700; }
   footer { border-top:1px solid var(--line); padding:22px 0; color:var(--muted); font-size:.9rem; background:#fff; }
 </style>
@@ -48,119 +64,203 @@
 <main class="wrap">
   <div class="card">
     <h1>Kom godt i gang</h1>
-    <p class="intro">Udfyld det, du kan, så Emil kan svare rigtigt på dine kunders spørgsmål. Det tager 3 minutter, og du kan altid rette det senere. Felter uden stjerne er valgfrie.</p>
-
-    <form id="f" autocomplete="on">
-      <h2>Om virksomheden</h2>
-      <label>Firmanavn *<input name="firma" required placeholder="Malerfirma Jensen ApS"></label>
-      <label>Dit navn (det Emil skriver under med) *<input name="navn" required placeholder="Jens"></label>
-      <label>Hjemmeside <span class="opt">— vi henter selv resten derfra</span><input name="web" type="url" placeholder="https://malerfirma-jensen.dk"></label>
-      <label>E-mail <input name="mail" type="email" placeholder="jens@malerfirma-jensen.dk"></label>
-      <label>Telefon <input name="tlf" placeholder="12 34 56 78"></label>
-      <label>Adresse <input name="adresse" placeholder="Hovedgaden 4, 2000 Frederiksberg"></label>
-      <label>CVR <input name="cvr" placeholder="12345678"></label>
-
-      <h2>Hvad laver I?</h2>
-      <p class="hint">Kort, som du ville forklare det til en ny kunde i telefonen.</p>
-      <textarea name="ydelser" placeholder="Vi laver indvendig og udvendig maling for private og boligforeninger i Storkøbenhavn. Vi tager også sprøjtespartling og tapetsering."></textarea>
-
-      <h2>Priser *</h2>
-      <p class="hint">Det vigtigste felt. Skriv præcis, som du plejer at sige det. Er noget "det kommer an på", så skriv dét — Emil finder aldrig selv på priser.</p>
-      <textarea name="priser" required placeholder="Timepris 475 kr. ekskl. moms.&#10;Vægge og lofter: fra 95 kr. pr. m2 inkl. materialer.&#10;Mindre opgaver: minimumspris 2.500 kr.&#10;Altid gratis og uforpligtende tilbud efter besigtigelse."></textarea>
-
-      <h2>Møder og booking</h2>
-      <label>Booking-link <span class="opt">— fx Calendly, hvis du har et</span><input name="booking" type="url" placeholder="https://calendly.com/dit-navn"></label>
-      <label>Hvordan aftaler du helst møder? <input name="modeform" placeholder="Ring til mig, eller foreslå to tidspunkter i mailen"></label>
-
-      <h2>Typiske spørgsmål</h2>
-      <p class="hint">Hvad spørger dine kunder oftest om, og hvad plejer du at svare? Skriv gerne 2-3 stykker.</p>
-      <textarea name="faq" placeholder="Hvor hurtigt kan I komme? Typisk 2-3 uger ude, men akutte opgaver kan vi ofte klemme ind.&#10;Rykker I møbler? Ja, det er med i prisen."></textarea>
-
-      <h2>Din tone</h2>
-      <p class="hint">Emil lærer din stil fra dine tidligere mails. Er der noget, den altid skal gøre eller undgå?</p>
-      <textarea name="tone" placeholder="Jeg er altid uformel og siger du. Skriver 'Mvh Jens' til sidst. Lover aldrig en dato, før jeg har set opgaven."></textarea>
-
-      <div class="actions">
-        <button class="btn" type="submit">Lav min opsætning</button>
-      </div>
-    </form>
+    <p class="intro">3 minutter, mest klik. Har du en hjemmeside, henter vi det meste selv derfra.</p>
   </div>
 
+  <form id="f" autocomplete="on">
+
+    <div class="card">
+      <h2><span class="stepnum">1</span> Om virksomheden</h2>
+      <p class="hint">Kun de to første er krævet.</p>
+      <div class="row">
+        <div><label class="f">Firmanavn *</label><input type="text" name="firma" required placeholder="Malerfirma Jensen ApS"></div>
+        <div><label class="f">Dit fornavn (Emil skriver under med det) *</label><input type="text" name="navn" required placeholder="Jens"></div>
+      </div>
+      <label class="f">Branche</label>
+      <select name="branche" id="branche">
+        <option value="Maler">Maler</option>
+        <option value="Tømrer/snedker">Tømrer / snedker</option>
+        <option value="Murer">Murer</option>
+        <option value="Elektriker">Elektriker</option>
+        <option value="VVS">VVS</option>
+        <option value="Anlæg/kloak">Anlæg / kloak</option>
+        <option value="Entreprenør">Entreprenør</option>
+        <option value="Andet håndværk">Andet håndværk</option>
+        <option value="Anden branche">Anden branche</option>
+      </select>
+      <label class="f">Hjemmeside <span class="opt">— vi henter selv jeres ydelser, adresse og info derfra</span></label>
+      <input type="url" name="web" placeholder="https://malerfirma-jensen.dk">
+      <div class="row">
+        <div><label class="f">Telefon <span class="opt">(valgfrit)</span></label><input type="text" name="tlf" placeholder="12 34 56 78"></div>
+        <div><label class="f">Booking-link <span class="opt">(valgfrit, fx Calendly)</span></label><input type="url" name="booking" placeholder="https://calendly.com/..."></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="stepnum">2</span> Priser *</h2>
+      <p class="hint">Det vigtigste felt. Klik på knapperne, ret tallene. Emil finder aldrig selv på priser.</p>
+      <div class="chips" id="prischips">
+        <button type="button" class="chip" data-t="Timepris: ___ kr ekskl. moms">+ Timepris</button>
+        <button type="button" class="chip" data-t="Pris pr. m2: fra ___ kr">+ Pris pr. m²</button>
+        <button type="button" class="chip" data-t="Minimumspris: ___ kr">+ Minimumspris</button>
+        <button type="button" class="chip" data-t="Fast tilbud efter gratis besigtigelse">+ Fast tilbud</button>
+        <button type="button" class="chip" data-t="Tilbud er altid gratis og uforpligtende">+ Gratis tilbud</button>
+      </div>
+      <textarea name="priser" id="priser" required></textarea>
+    </div>
+
+    <div class="card">
+      <h2><span class="stepnum">3</span> Din tone</h2>
+      <p class="hint">Emil lærer detaljerne fra dine egne mails. Vælg bare den, der ligner dig mest.</p>
+      <div class="tones" id="tones">
+        <label class="tone"><input type="radio" name="tone" value="Kort og kontant">
+          <b>Kort og kontant</b>
+          <span class="ex">"Hej Michael. Det er fint. Jeg kommer torsdag kl. 9. Mvh Jens"</span>
+        </label>
+        <label class="tone"><input type="radio" name="tone" value="Venlig og uformel">
+          <b>Venlig og uformel</b>
+          <span class="ex">"Hej Michael! Tak for din besked :) Torsdag passer perfekt, vi ses kl. 9. Bh. Jens"</span>
+        </label>
+        <label class="tone"><input type="radio" name="tone" value="Professionel og formel">
+          <b>Professionel og formel</b>
+          <span class="ex">"Kære Michael. Tak for Deres henvendelse. Vi bekræfter besigtigelsen torsdag kl. 9. Med venlig hilsen Jens"</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="stepnum">4</span> Typiske spørgsmål</h2>
+      <p class="hint">Sæt hak ved dem, dine kunder stiller, og skriv dit korte svar. Spring resten over.</p>
+      <div id="faqliste"></div>
+    </div>
+
+    <div class="card">
+      <div class="actions" style="margin-top:0">
+        <button class="btn" type="submit">Lav min opsætning</button>
+      </div>
+    </div>
+  </form>
+
   <div class="card" id="resultat">
-    <h2 style="margin-top:0">✅ Færdig</h2>
-    <p class="hint">Send teksten herunder til os, så er du klar. Brug knapperne, eller kopiér den selv.</p>
+    <h2 style="margin-bottom:8px">✅ Færdig</h2>
+    <p class="hint" style="margin-left:0">Send teksten til os, så er du klar.</p>
     <textarea id="ud" readonly></textarea>
     <div class="actions">
       <a class="btn" id="send" href="#">Send til EmailEmil</a>
-      <button class="btn sec" type="button" id="kopi">Kopiér tekst</button>
+      <button class="btn sec" type="button" id="kopi">Kopiér</button>
       <button class="btn sec" type="button" id="hent">Hent som fil</button>
     </div>
-    <p class="hint" id="kvit" style="margin-top:12px"></p>
+    <p class="hint" id="kvit" style="margin:12px 0 0"></p>
   </div>
 </main>
 
 <footer><div class="wrap">© BygAI ApS · EmailEmil · <a href="/">emailemil.dk</a></div></footer>
 
 <script>
-  const f = document.getElementById("f");
-  const ud = document.getElementById("ud");
-  const boks = document.getElementById("resultat");
-  const kvit = document.getElementById("kvit");
+  // Branche-styret indhold: pris-forslag og typiske kundespørgsmål.
+  var FAELLES_FAQ = [
+    { q: "Hvornår kan I komme i gang?", ph: "Typisk 2-3 uger ude. Akutte opgaver kan ofte klemmes ind." },
+    { q: "Kommer I ud og ser opgaven først?", ph: "Ja, ved større opgaver besigtiger vi altid først." },
+    { q: "Giver I garanti på arbejdet?", ph: "Ja, vi følger branchens garantiordning." },
+    { q: "Hvilket område dækker I?", ph: "Fx: Storkøbenhavn og omegn." },
+    { q: "Arbejder I aften eller weekend?", ph: "Fx: Kun efter aftale." },
+  ];
+  var BRANCHER = {
+    "Maler": { pris: "Timepris: 475 kr ekskl. moms\nVægge og lofter: fra 95 kr pr. m2 inkl. maling\nTilbud er altid gratis og uforpligtende",
+      faq: [ { q: "Skal jeg selv flytte møbler?", ph: "Nej, vi rykker og afdækker." }, { q: "Er maling med i prisen?", ph: "Ja, standardmaling er inkluderet." } ] },
+    "Tømrer/snedker": { pris: "Timepris: 495 kr ekskl. moms\nFast tilbud efter gratis besigtigelse", faq: [ { q: "Leverer I selv materialer?", ph: "Ja, vi bestiller og fakturerer materialer til kostpris." } ] },
+    "Murer": { pris: "Timepris: 495 kr ekskl. moms\nFast tilbud efter gratis besigtigelse", faq: [] },
+    "Elektriker": { pris: "Timepris: 550 kr ekskl. moms\nOpstart/kørsel: ___ kr", faq: [ { q: "Tager I akutte opgaver?", ph: "Ja, ring på telefonen, så finder vi en løsning." } ] },
+    "VVS": { pris: "Timepris: 550 kr ekskl. moms\nOpstart/kørsel: ___ kr", faq: [ { q: "Tager I akutte opgaver?", ph: "Ja, ring på telefonen, så finder vi en løsning." } ] },
+    "Anlæg/kloak": { pris: "Timepris: 525 kr ekskl. moms\nFast tilbud efter gratis besigtigelse", faq: [] },
+    "Entreprenør": { pris: "Fast tilbud efter besigtigelse og gennemgang af projekt", faq: [ { q: "Kan I styre hele projektet inkl. underentreprenører?", ph: "Ja, vi tager gerne totalentreprisen." } ] },
+    "Andet håndværk": { pris: "Timepris: ___ kr ekskl. moms\nFast tilbud efter gratis besigtigelse", faq: [] },
+    "Anden branche": { pris: "Fx: Pris pr. time / pr. opgave / pr. måned: ___ kr", faq: [ { q: "Hvor hurtigt vender I tilbage?", ph: "Fx: Samme dag på hverdage." }, { q: "Kan vi tage et møde?", ph: "Fx: Ja, book gerne direkte i kalenderen." } ] },
+  };
 
-  function felt(titel, vaerdi) {
-    const v = (vaerdi || "").trim();
-    return v ? "- " + titel + ": " + v + "\n" : "";
+  var brancheEl = document.getElementById("branche");
+  var faqliste = document.getElementById("faqliste");
+  var priser = document.getElementById("priser");
+
+  function byg() {
+    var b = BRANCHER[brancheEl.value] || BRANCHER["Anden branche"];
+    priser.placeholder = b.pris;
+    var alle = (brancheEl.value === "Anden branche" ? [] : FAELLES_FAQ).concat(b.faq);
+    faqliste.innerHTML = "";
+    alle.forEach(function (item, i) {
+      var d = document.createElement("div");
+      d.className = "faq-item";
+      d.innerHTML = '<label class="q"><input type="checkbox" data-i="' + i + '"> ' + item.q + "</label>" +
+        '<div class="svar"><input type="text" placeholder="' + item.ph.replace(/"/g, "&quot;") + '" aria-label="Dit svar"></div>';
+      var cb = d.querySelector("input[type=checkbox]");
+      cb.addEventListener("change", function () { d.classList.toggle("aaben", cb.checked); if (cb.checked) d.querySelector(".svar input").focus(); });
+      d.dataset.q = item.q;
+      faqliste.appendChild(d);
+    });
   }
-  function blok(titel, vaerdi) {
-    const v = (vaerdi || "").trim();
-    return v ? "\n## " + titel + "\n" + v + "\n" : "";
-  }
+  brancheEl.addEventListener("change", byg);
+  byg();
+
+  document.getElementById("prischips").addEventListener("click", function (e) {
+    var t = e.target.getAttribute && e.target.getAttribute("data-t");
+    if (!t) return;
+    priser.value = (priser.value ? priser.value.replace(/\n*$/, "\n") : "") + t + "\n";
+    priser.focus();
+  });
+
+  document.querySelectorAll(".tone").forEach(function (card) {
+    card.addEventListener("click", function () {
+      document.querySelectorAll(".tone").forEach(function (c) { c.classList.remove("valgt"); });
+      card.classList.add("valgt");
+    });
+  });
+
+  var f = document.getElementById("f");
+  var ud = document.getElementById("ud");
+  var boks = document.getElementById("resultat");
+  var kvit = document.getElementById("kvit");
+
+  function felt(titel, v) { v = (v || "").trim(); return v ? "- " + titel + ": " + v + "\n" : ""; }
 
   f.addEventListener("submit", function (e) {
     e.preventDefault();
-    const d = Object.fromEntries(new FormData(f).entries());
-    let t = "# Virksomhedsviden: " + (d.firma || "").trim() + "\n\n";
-    t += "Udfyldt af kunden via emailemil.dk/opsaetning · " + new Date().toISOString().slice(0, 10) + "\n\n";
+    var d = Object.fromEntries(new FormData(f).entries());
+    var t = "# Virksomhedsviden: " + (d.firma || "").trim() + "\n\n";
+    t += "Udfyldt via emailemil.dk/opsaetning · " + new Date().toISOString().slice(0, 10) + "\n\n";
     t += "## Virksomhed\n";
     t += felt("Firma", d.firma);
     t += felt("Kontaktperson", d.navn);
+    t += felt("Branche", d.branche);
     t += felt("Website", d.web);
-    t += felt("E-mail", d.mail);
     t += felt("Telefon", d.tlf);
-    t += felt("Adresse", d.adresse);
-    t += felt("CVR", d.cvr);
-    t += blok("Hvad vi laver", d.ydelser);
-    t += blok("Priser", d.priser);
-    if ((d.booking || "").trim() || (d.modeform || "").trim()) {
-      t += "\n## Møde-booking\n";
-      t += felt("Booking-link", d.booking);
-      t += felt("Sådan aftales møder helst", d.modeform);
-    }
-    t += blok("Ofte stillede spørgsmål", d.faq);
-    t += blok("Tone i kundesvar", d.tone);
+    if ((d.booking || "").trim()) t += "\n## Møde-booking\n" + felt("Booking-link (tilbyd kunder at vælge en tid her)", d.booking);
+    t += "\n## Priser\n" + (d.priser || "").trim() + "\n";
+
+    var faqs = [];
+    document.querySelectorAll(".faq-item").forEach(function (item) {
+      var cb = item.querySelector("input[type=checkbox]");
+      var svar = item.querySelector(".svar input").value.trim();
+      if (cb.checked && svar) faqs.push("Spm: " + item.dataset.q + "\nSvar: " + svar);
+    });
+    if (faqs.length) t += "\n## Ofte stillede spørgsmål\n" + faqs.join("\n\n") + "\n";
+
+    if (d.tone) t += "\n## Tone i kundesvar\n" + d.tone + " (Emil lærer detaljerne fra tidligere sendte mails)\n";
 
     ud.value = t;
     boks.classList.add("vis");
     boks.scrollIntoView({ behavior: "smooth" });
-
-    const emne = "EmailEmil opsætning: " + (d.firma || "").trim();
-    document.getElementById("send").href =
-      "mailto:oskar@bygai.dk?subject=" + encodeURIComponent(emne) + "&body=" + encodeURIComponent(t);
+    var emne = "EmailEmil opsætning: " + (d.firma || "").trim();
+    document.getElementById("send").href = "mailto:oskar@bygai.dk?subject=" + encodeURIComponent(emne) + "&body=" + encodeURIComponent(t);
   });
 
-  document.getElementById("kopi").addEventListener("click", async function () {
-    try {
-      await navigator.clipboard.writeText(ud.value);
-      kvit.innerHTML = '<span class="ok">Kopieret.</span> Indsæt teksten i en mail til oskar@bygai.dk.';
-    } catch (err) {
-      ud.select();
-      kvit.textContent = "Tryk Cmd+C (eller Ctrl+C) for at kopiere den markerede tekst.";
-    }
+  document.getElementById("kopi").addEventListener("click", function () {
+    navigator.clipboard.writeText(ud.value).then(function () {
+      kvit.innerHTML = '<span class="ok">Kopieret.</span> Indsæt i en mail til oskar@bygai.dk.';
+    }, function () { ud.select(); kvit.textContent = "Tryk Cmd+C for at kopiere."; });
   });
-
   document.getElementById("hent").addEventListener("click", function () {
-    const blob = new Blob([ud.value], { type: "text/markdown;charset=utf-8" });
-    const a = document.createElement("a");
+    var blob = new Blob([ud.value], { type: "text/markdown;charset=utf-8" });
+    var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = "emailemil-opsaetning.md";
     a.click();
