@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kom godt i gang · EmailEmil</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="logo-mark.png">
+<style>
+  :root { --blue:#1a73e8; --blue-dark:#135cbc; --ink:#1c2b3a; --muted:#5a6b7d; --line:#dfe8f2; --soft:#f4f8fe; --ok:#1d7a46; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif; color:var(--ink); line-height:1.6; background:var(--soft); }
+  h1,h2,.logo,.btn { font-family:"Arial Rounded MT Bold","Avenir Next","Trebuchet MS",sans-serif; }
+  .wrap { max-width:720px; margin:0 auto; padding:0 20px; }
+  header { background:#fff; border-bottom:1px solid var(--line); }
+  .nav { display:flex; align-items:center; gap:10px; padding-block:12px; }
+  .logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.2rem; color:var(--blue); text-decoration:none; }
+  main { padding:36px 0 60px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:16px; padding:28px; margin-bottom:20px; }
+  h1 { font-size:1.7rem; margin-bottom:8px; }
+  .intro { color:var(--muted); margin-bottom:24px; }
+  h2 { font-size:1.05rem; margin:24px 0 4px; }
+  h2:first-of-type { margin-top:0; }
+  .hint { color:var(--muted); font-size:.88rem; margin-bottom:8px; }
+  label { display:block; font-weight:600; font-size:.95rem; margin:14px 0 4px; }
+  label .opt { font-weight:400; color:var(--muted); font-size:.85rem; }
+  input, textarea { width:100%; padding:11px 13px; border:1px solid var(--line); border-radius:10px; font:inherit; font-size:1rem; background:#fff; color:var(--ink); }
+  input:focus, textarea:focus { outline:2px solid var(--blue); outline-offset:-1px; border-color:var(--blue); }
+  textarea { min-height:90px; resize:vertical; }
+  .btn { display:inline-block; background:var(--blue); color:#fff; padding:13px 26px; border-radius:999px; border:0; font-weight:700; font-size:1rem; cursor:pointer; text-decoration:none; }
+  .btn:hover { background:var(--blue-dark); }
+  .btn.sec { background:#fff; color:var(--blue); border:2px solid var(--blue); }
+  .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
+  #resultat { display:none; }
+  #resultat.vis { display:block; }
+  #ud { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.85rem; min-height:260px; background:var(--soft); }
+  .ok { color:var(--ok); font-weight:700; }
+  footer { border-top:1px solid var(--line); padding:22px 0; color:var(--muted); font-size:.9rem; background:#fff; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="/"><img src="logo-mark.png" alt="" width="32" height="32" style="border-radius:8px;display:block"> EmailEmil</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="card">
+    <h1>Kom godt i gang</h1>
+    <p class="intro">Udfyld det, du kan, så Emil kan svare rigtigt på dine kunders spørgsmål. Det tager 3 minutter, og du kan altid rette det senere. Felter uden stjerne er valgfrie.</p>
+
+    <form id="f" autocomplete="on">
+      <h2>Om virksomheden</h2>
+      <label>Firmanavn *<input name="firma" required placeholder="Malerfirma Jensen ApS"></label>
+      <label>Dit navn (det Emil skriver under med) *<input name="navn" required placeholder="Jens"></label>
+      <label>Hjemmeside <span class="opt">— vi henter selv resten derfra</span><input name="web" type="url" placeholder="https://malerfirma-jensen.dk"></label>
+      <label>E-mail <input name="mail" type="email" placeholder="jens@malerfirma-jensen.dk"></label>
+      <label>Telefon <input name="tlf" placeholder="12 34 56 78"></label>
+      <label>Adresse <input name="adresse" placeholder="Hovedgaden 4, 2000 Frederiksberg"></label>
+      <label>CVR <input name="cvr" placeholder="12345678"></label>
+
+      <h2>Hvad laver I?</h2>
+      <p class="hint">Kort, som du ville forklare det til en ny kunde i telefonen.</p>
+      <textarea name="ydelser" placeholder="Vi laver indvendig og udvendig maling for private og boligforeninger i Storkøbenhavn. Vi tager også sprøjtespartling og tapetsering."></textarea>
+
+      <h2>Priser *</h2>
+      <p class="hint">Det vigtigste felt. Skriv præcis, som du plejer at sige det. Er noget "det kommer an på", så skriv dét — Emil finder aldrig selv på priser.</p>
+      <textarea name="priser" required placeholder="Timepris 475 kr. ekskl. moms.&#10;Vægge og lofter: fra 95 kr. pr. m2 inkl. materialer.&#10;Mindre opgaver: minimumspris 2.500 kr.&#10;Altid gratis og uforpligtende tilbud efter besigtigelse."></textarea>
+
+      <h2>Møder og booking</h2>
+      <label>Booking-link <span class="opt">— fx Calendly, hvis du har et</span><input name="booking" type="url" placeholder="https://calendly.com/dit-navn"></label>
+      <label>Hvordan aftaler du helst møder? <input name="modeform" placeholder="Ring til mig, eller foreslå to tidspunkter i mailen"></label>
+
+      <h2>Typiske spørgsmål</h2>
+      <p class="hint">Hvad spørger dine kunder oftest om, og hvad plejer du at svare? Skriv gerne 2-3 stykker.</p>
+      <textarea name="faq" placeholder="Hvor hurtigt kan I komme? Typisk 2-3 uger ude, men akutte opgaver kan vi ofte klemme ind.&#10;Rykker I møbler? Ja, det er med i prisen."></textarea>
+
+      <h2>Din tone</h2>
+      <p class="hint">Emil lærer din stil fra dine tidligere mails. Er der noget, den altid skal gøre eller undgå?</p>
+      <textarea name="tone" placeholder="Jeg er altid uformel og siger du. Skriver 'Mvh Jens' til sidst. Lover aldrig en dato, før jeg har set opgaven."></textarea>
+
+      <div class="actions">
+        <button class="btn" type="submit">Lav min opsætning</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card" id="resultat">
+    <h2 style="margin-top:0">✅ Færdig</h2>
+    <p class="hint">Send teksten herunder til os, så er du klar. Brug knapperne, eller kopiér den selv.</p>
+    <textarea id="ud" readonly></textarea>
+    <div class="actions">
+      <a class="btn" id="send" href="#">Send til EmailEmil</a>
+      <button class="btn sec" type="button" id="kopi">Kopiér tekst</button>
+      <button class="btn sec" type="button" id="hent">Hent som fil</button>
+    </div>
+    <p class="hint" id="kvit" style="margin-top:12px"></p>
+  </div>
+</main>
+
+<footer><div class="wrap">© BygAI ApS · EmailEmil · <a href="/">emailemil.dk</a></div></footer>
+
+<script>
+  const f = document.getElementById("f");
+  const ud = document.getElementById("ud");
+  const boks = document.getElementById("resultat");
+  const kvit = document.getElementById("kvit");
+
+  function felt(titel, vaerdi) {
+    const v = (vaerdi || "").trim();
+    return v ? "- " + titel + ": " + v + "\n" : "";
+  }
+  function blok(titel, vaerdi) {
+    const v = (vaerdi || "").trim();
+    return v ? "\n## " + titel + "\n" + v + "\n" : "";
+  }
+
+  f.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(f).entries());
+    let t = "# Virksomhedsviden: " + (d.firma || "").trim() + "\n\n";
+    t += "Udfyldt af kunden via emailemil.dk/opsaetning · " + new Date().toISOString().slice(0, 10) + "\n\n";
+    t += "## Virksomhed\n";
+    t += felt("Firma", d.firma);
+    t += felt("Kontaktperson", d.navn);
+    t += felt("Website", d.web);
+    t += felt("E-mail", d.mail);
+    t += felt("Telefon", d.tlf);
+    t += felt("Adresse", d.adresse);
+    t += felt("CVR", d.cvr);
+    t += blok("Hvad vi laver", d.ydelser);
+    t += blok("Priser", d.priser);
+    if ((d.booking || "").trim() || (d.modeform || "").trim()) {
+      t += "\n## Møde-booking\n";
+      t += felt("Booking-link", d.booking);
+      t += felt("Sådan aftales møder helst", d.modeform);
+    }
+    t += blok("Ofte stillede spørgsmål", d.faq);
+    t += blok("Tone i kundesvar", d.tone);
+
+    ud.value = t;
+    boks.classList.add("vis");
+    boks.scrollIntoView({ behavior: "smooth" });
+
+    const emne = "EmailEmil opsætning: " + (d.firma || "").trim();
+    document.getElementById("send").href =
+      "mailto:oskar@bygai.dk?subject=" + encodeURIComponent(emne) + "&body=" + encodeURIComponent(t);
+  });
+
+  document.getElementById("kopi").addEventListener("click", async function () {
+    try {
+      await navigator.clipboard.writeText(ud.value);
+      kvit.innerHTML = '<span class="ok">Kopieret.</span> Indsæt teksten i en mail til oskar@bygai.dk.';
+    } catch (err) {
+      ud.select();
+      kvit.textContent = "Tryk Cmd+C (eller Ctrl+C) for at kopiere den markerede tekst.";
+    }
+  });
+
+  document.getElementById("hent").addEventListener("click", function () {
+    const blob = new Blob([ud.value], { type: "text/markdown;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "emailemil-opsaetning.md";
+    a.click();
+    URL.revokeObjectURL(a.href);
+    kvit.innerHTML = '<span class="ok">Filen er hentet.</span> Send den til oskar@bygai.dk.';
+  });
+</script>
+</body>
+</html>
