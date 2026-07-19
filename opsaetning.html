@@ -129,8 +129,10 @@
     </div>
 
     <div class="card">
-      <h2><span class="stepnum">4</span> Typiske spørgsmål</h2>
-      <p class="hint">Sæt hak ved dem, dine kunder stiller, og skriv dit korte svar. Spring resten over.</p>
+      <h2><span class="stepnum">4</span> Hvad handler dine mails om?</h2>
+      <p class="hint">Beskriv med dine egne ord, hvilke mails du får flest af, og hvad du plejer at svare. Det er guld for Emil.</p>
+      <textarea name="typiske" style="margin-left:0" placeholder="Fx: De fleste mails er forespørgsler på tilbud til opgange og trappeopgange fra boligforeninger. Jeg svarer altid, at jeg gerne kommer forbi og ser opgangen først, og at de skal sende adressen og antal etager.&#10;&#10;Vi får også en del om reklamationer på afsmitning. Der beder jeg altid om et billede først."></textarea>
+      <p class="hint" style="margin:16px 0 8px">Eller sæt hurtigt hak ved de klassiske herunder og skriv dit korte svar:</p>
       <div id="faqliste"></div>
     </div>
 
@@ -235,6 +237,10 @@
     t += felt("Telefon", d.tlf);
     if ((d.booking || "").trim()) t += "\n## Møde-booking\n" + felt("Booking-link (tilbyd kunder at vælge en tid her)", d.booking);
     t += "\n## Priser\n" + (d.priser || "").trim() + "\n";
+
+    if ((d.typiske || "").trim()) {
+      t += "\n## Typiske henvendelser (kundens egne ord om, hvad mails oftest handler om, og hvordan der svares)\n" + d.typiske.trim() + "\n";
+    }
 
     var faqs = [];
     document.querySelectorAll(".faq-item").forEach(function (item) {
